@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Running server"
+. ./venv/bin/activate
+case "$#" in
+0 )
+      port=8080
+;;
+1 )
+      port=$1
+esac
+cd mars
+./manage.py runserver $port
