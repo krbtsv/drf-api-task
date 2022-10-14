@@ -1,15 +1,27 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from books.models import Book
+from books.models import Book, UserBookRelation
 from books.serializers import BooksSerializer
 
 
 class BookSerializerTestCase(TestCase):
     def test_ok(self):
-        self.user = User.objects.create(username='username')
-        book_1 = Book.objects.create(title='test book 1', price=10, author_name='author 1', creator=self.user)
-        book_2 = Book.objects.create(title='test book 2', price=15, author_name='author 2', creator=self.user)
+        user1 = User.objects.create(username='user1')
+        user2 = User.objects.create(username='user2')
+        user3 = User.objects.create(username='user3')
+
+        book_1 = Book.objects.create(title='test book 1', price=10, author_name='author 1')
+        book_2 = Book.objects.create(title='test book 2', price=15, author_name='author 2')
+
+        UserBookRelation.objects.create(user=user1, book=book_1, like=True)
+        UserBookRelation.objects.create(user=user2, book=book_1, like=True)
+        UserBookRelation.objects.create(user=user3, book=book_1, like=True)
+
+        UserBookRelation.objects.create(user=user1, book=book_2, like=True)
+        UserBookRelation.objects.create(user=user2, book=book_2, like=True)
+        UserBookRelation.objects.create(user=user3, book=book_2, like=False)
+
         data = BooksSerializer([book_1, book_2], many=True).data
         expected_data = [
             {
@@ -17,14 +29,14 @@ class BookSerializerTestCase(TestCase):
                 'title': 'test book 1',
                 'price': '10.00',
                 'author_name': 'author 1',
-                'creator': 1
+                'likes_count': 3
             },
             {
                 'id': book_2.id,
                 'title': 'test book 2',
                 'price': '15.00',
                 'author_name': 'author 2',
-                'creator': 1
+                'likes_count': 2
             },
         ]
         self.assertEqual(expected_data, data)
