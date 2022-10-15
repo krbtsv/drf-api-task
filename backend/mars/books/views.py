@@ -1,4 +1,4 @@
-from django.db.models import Count, Case, When
+from django.db.models import Count, Case, When, Avg
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import UpdateModelMixin
@@ -12,7 +12,9 @@ from books.serializers import BooksSerializer, UserBookRelationSerializer
 
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all().annotate(
-            annotated_likes=Count(Case(When(userbookrelation__like=True, then=1))))
+        annotated_likes=Count(Case(When(userbookrelation__like=True, then=1))),
+        rating=Avg('userbookrelation__rate')
+    ).order_by('id')
     serializer_class = BooksSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     permission_classes = [IsCreatorOrStaffOrReadOnly]
