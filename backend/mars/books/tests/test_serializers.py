@@ -8,11 +8,11 @@ from books.serializers import BooksSerializer
 
 class BookSerializerTestCase(TestCase):
     def test_ok(self):
-        user1 = User.objects.create(username='user1')
-        user2 = User.objects.create(username='user2')
-        user3 = User.objects.create(username='user3')
+        user1 = User.objects.create(username='user1', first_name='Max', last_name='Karabtsov')
+        user2 = User.objects.create(username='user2', first_name='Bugs', last_name='Banny')
+        user3 = User.objects.create(username='user3', first_name='0', last_name='1')
 
-        book_1 = Book.objects.create(title='test book 1', price=10, author_name='author 1')
+        book_1 = Book.objects.create(title='test book 1', price=10, author_name='author 1', creator=user1)
         book_2 = Book.objects.create(title='test book 2', price=15, author_name='author 2')
 
         UserBookRelation.objects.create(user=user1, book=book_1, like=True, rate=5)
@@ -34,18 +34,46 @@ class BookSerializerTestCase(TestCase):
                 'title': 'test book 1',
                 'price': '10.00',
                 'author_name': 'author 1',
-                'likes_count': 3,
                 'annotated_likes': 3,
                 'rating': '4.67',
+                'creator_name': 'user1',
+                'readers': [
+                    {
+                        'first_name': 'Max',
+                        'last_name': 'Karabtsov'
+                    },
+                    {
+                        'first_name': 'Bugs',
+                        'last_name': 'Banny'
+                    },
+                    {
+                        'first_name': '0',
+                        'last_name': '1'
+                    },
+                ]
             },
             {
                 'id': book_2.id,
                 'title': 'test book 2',
                 'price': '15.00',
                 'author_name': 'author 2',
-                'likes_count': 2,
                 'annotated_likes': 2,
                 'rating': '3.50',
+                'creator_name': '',
+                'readers': [
+                    {
+                        'first_name': 'Max',
+                        'last_name': 'Karabtsov'
+                    },
+                    {
+                        'first_name': 'Bugs',
+                        'last_name': 'Banny'
+                    },
+                    {
+                        'first_name': '0',
+                        'last_name': '1'
+                    },
+                ]
             },
         ]
         self.assertEqual(expected_data, data)

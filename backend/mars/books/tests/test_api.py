@@ -31,7 +31,6 @@ class BooksAPITestCase(APITestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
         self.assertEqual(serializer_data[0]['rating'], '4.00')
-        self.assertEqual(serializer_data[0]['likes_count'], 1)
         self.assertEqual(serializer_data[0]['annotated_likes'], 1)
 
     def test_get_filter(self):
