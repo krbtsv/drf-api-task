@@ -5,13 +5,16 @@
 + Authentication user from token
 + Create books
 + Users can execute CRUD(the books) according to permissions
++ Users can like and bookmark books
 
+## Permission
 Read data - access for everyone  
 Create data - access for authorized users  
 Update data - access for creator  
 Delete data - access for creator  
 
 admin - full access
+
 ___
 ### For Linux
 ___
