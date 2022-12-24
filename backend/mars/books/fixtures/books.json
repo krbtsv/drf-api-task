@@ -1,0 +1,68 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "first book",
+      "price": "50.00",
+      "author_name": "Ben",
+      "creator": null,
+      "rating": null
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "second book",
+      "price": "100.00",
+      "author_name": "Sara",
+      "creator": 4,
+      "rating": null
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "title": "third book",
+      "price": "110.00",
+      "author_name": "Mike",
+      "creator": 5,
+      "rating": null
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "title": "Clean code",
+      "price": "700.00",
+      "author_name": "Some",
+      "creator": 4,
+      "rating": null
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "title": "Stephen Hawking Lifestyle",
+      "price": "120.00",
+      "author_name": "Maxim Karabtsov",
+      "creator": 1,
+      "rating": null
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 6,
+    "fields": {
+      "title": "new_book",
+      "price": "333.00",
+      "author_name": "Tobi",
+      "creator": 1,
+      "rating": null
+    }
+  }
+]

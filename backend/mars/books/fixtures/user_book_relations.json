@@ -1,0 +1,35 @@
+[
+  {
+    "model": "books.userbookrelation",
+    "pk": 1,
+    "fields": {
+      "user": 5,
+      "book": 5,
+      "like": true,
+      "in_bookmarks": false,
+      "rate": 4
+    }
+  },
+  {
+    "model": "books.userbookrelation",
+    "pk": 2,
+    "fields": {
+      "user": 5,
+      "book": 6,
+      "like": true,
+      "in_bookmarks": false,
+      "rate": 5
+    }
+  },
+  {
+    "model": "books.userbookrelation",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "book": 6,
+      "like": true,
+      "in_bookmarks": false,
+      "rate": 2
+    }
+  }
+]
